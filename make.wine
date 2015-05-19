@@ -1,0 +1,2 @@
+i586-mingw32msvc-windres -o resources.o specan.rc
+i586-mingw32msvc-gcc -o specan.exe specan.c resources.o -lcomctl32 -mwindows -g
