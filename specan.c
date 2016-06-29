@@ -144,7 +144,7 @@ LRESULT CALLBACK WindowProcedure (HWND, UINT, WPARAM, LPARAM);
 void plotReadings(HDC hdc);
 
 int openSerialPort(int port){
-  char c[10];
+  char c[200];
   DCB dcbSerialParams = {0};  
   COMMTIMEOUTS timeouts ={0};  
   
