@@ -134,7 +134,7 @@ void setStatus2(char *msg){
 void setReadOut(int power, int frequency){
   char readOut[100];
   
-  sprintf(readOut, "Power : %d.%02dbm, Freq : %d.%03d.%03", power/10, abs(power % 10), 
+  sprintf(readOut, "Power : %d.%02dbm, Freq : %d.%03d.%03d", power/10, abs(power % 10), 
     frequency/1000000, (frequency % 1000000)/1000, frequency % 1000);
   SendMessage(statusWnd, SB_SETTEXT, 1, (LPARAM)readOut);  
 }
@@ -212,6 +212,7 @@ void saveCaliberation(){
   if (!pf)
     return;  
 	fprintf(pf, "port:%d\n", currentPort);
+	fclose(pf);
 }
 
 void loadCaliberation(){
@@ -244,7 +245,7 @@ void loadCaliberation(){
 	    }
    }
 
-	close();
+	fclose(pf);
   InvalidateRect(mainWnd, NULL, TRUE);
   UpdateWindow(mainWnd);
 }
@@ -713,7 +714,7 @@ void plotReadings(HDC hdc){
 }
 
 void plotReference(HDC hdc){
-  int i;
+  int i=0;
   HANDLE oldpen;
   
   oldpen = SelectObject(hdc, penRed);  
